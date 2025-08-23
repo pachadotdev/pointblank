@@ -4,274 +4,390 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Validation of Local and Remote Data Tables • pointblank</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Validation of Local and Remote Data Tables">
-<meta property="og:description" content="Validate data in data frames, tibble objects, and in database
-    tables (e.g., PostgreSQL and MySQL). Validation pipelines can be made
-    using easily-readable, consecutive validation steps. Upon execution of the
-    validation plan, several reporting options are available. User-defined
-    thresholds for failure rates allow for the determination of appropriate
-    reporting actions.">
-<meta property="og:image" content="/logo.svg">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Data Validation and Organization of Metadata for Local and Remote Tables • pointblank</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
+<script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="Data Validation and Organization of Metadata for Local and Remote Tables">
+<meta name="description" content="Validate data in data frames, tibble objects, Spark DataFrames, and database tables. Validation pipelines can be made using easily-readable, consecutive validation steps. Upon execution of the validation plan, several reporting options are available. User-defined thresholds for failure rates allow for the determination of appropriate reporting actions. Many other workflows are available including an information management workflow, where the aim is to record, collect, and generate useful information on data tables.">
+<meta property="og:description" content="Validate data in data frames, tibble objects, Spark DataFrames, and database tables. Validation pipelines can be made using easily-readable, consecutive validation steps. Upon execution of the validation plan, several reporting options are available. User-defined thresholds for failure rates allow for the determination of appropriate reporting actions. Many other workflows are available including an information management workflow, where the aim is to record, collect, and generate useful information on data tables.">
+<meta property="og:image" content="https://rstudio.github.io/pointblank/logo.svg">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">pointblank</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.5.0.9000</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="articles/intro-to-pointblank.html">Intro</a>
+
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="index.html">pointblank</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.12.2.9000</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/pointblank.html">Get Started</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><h6 class="dropdown-header" data-toc-skip>Validation Workflows</h6></li>
+    <li><a class="dropdown-item" href="articles/validation_workflows.html">Overview</a></li>
+    <li><a class="dropdown-item" href="articles/VALID-I.html">VALID-I: Data Quality Reporting</a></li>
+    <li><a class="dropdown-item" href="articles/VALID-II.html">VALID-II: Pipeline Data Validation</a></li>
+    <li><a class="dropdown-item" href="articles/VALID-III.html">VALID-III: Expectations in Unit Tests</a></li>
+    <li><a class="dropdown-item" href="articles/VALID-IV.html">VALID-IV: Data Tests for Conditionals</a></li>
+    <li><a class="dropdown-item" href="articles/VALID-V.html">VALID-V: Table Scan</a></li>
+    <li><a class="dropdown-item" href="articles/VALID-VI.html">VALID-VI: R Markdown Document Validation</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Information Management</h6></li>
+    <li><a class="dropdown-item" href="articles/INFO-1.html">Intro to Information Management</a></li>
+    <li><a class="dropdown-item" href="articles/INFO-2.html">Advanced Information Management</a></li>
+  </ul>
 </li>
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="news/index.html">News</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">News</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/rich-iannone/pointblank">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rstudio/pointblank/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div align="center">
+<p><br></p>
+<p><a href="https://rstudio.github.io/pointblank/"><img src="reference/figures/logo.svg" width="350px"></a></p>
+<!-- badges: start -->
+
+<hr style="color:transparent">
+<p><br></p>
 </div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div id="pointblank-" class="section level1">
-
-
-<p>With the <strong>pointblank</strong> package it’s really easy to validate your data with workflows attuned to your data quality needs. The <strong>pointblank</strong> philosophy: a set of validation functions should work seamlessly with data in local data tables and with data in databases.</p>
-<p>The two dominant workflows that <strong>pointblank</strong> enables are <em>data quality reporting</em> and <em>pipeline-based data validations</em>. Both workflows make use of a large collection of simple validation functions (e.g., are values in a specific column greater than those in another column or some fixed value?), and, both allow for stepwise, temporary mutation/alteration of the input table (through <code>preconditions</code>) to enable much more sophisticated validation checks.</p>
+<p>With the <strong>pointblank</strong> package it’s really easy to methodically validate your data whether in the form of data frames or as database tables. On top of the validation toolset, the package gives you the means to provide and keep up-to-date with the information that <em>defines</em> your tables.</p>
+<p>For table <em>validation</em>, the <em>agent</em> object works with a large collection of simple (yet powerful!) validation functions. We can enable much more sophisticated validation checks by using custom expressions, segmenting the data, and by selective mutations of the target table. The suite of validation functions ensures that <em>everything just works</em> no matter whether your table is a data frame or a database table.</p>
+<p>Sometimes, we want to maintain table <em>information</em> and update it when the table goes through changes. For that, we can use an <em>informant</em> object plus associated functions to help define the metadata entries and present it as a data dictionary. Just like we can with validation, <strong>pointblank</strong> offers easy ways to have the metadata updated so that this important documentation doesn’t become stale.</p>
 <hr>
-<p><img src="reference/figures/data_quality_reporting_workflow.png"></p>
-<p>The first workflow, <em>data quality reporting</em> allows for the easy creation of a data quality analysis report. This is most useful in a non-interactive mode where data quality for database tables and on-disk data files must be periodically checked. The reporting component (through a <strong>pointblank</strong> agent) allows for the collection of detailed validation measures for each validation step, the optional extraction of data rows that failed validation (with options on limits), and custom functions that are invoked by exceeding set threshold failure rates. Want to email the report regularly (or, only if certain conditions are met)? Yep, you can do all that.</p>
-<hr>
-<p><img src="reference/figures/pipeline_based_data_validations.png"></p>
-<p>The second workflow, <em>pipeline-based data validations</em> gives us a different validation scheme that is valuable for data validation checks during an ETL process. With <strong>pointblank</strong>’s validation functions, we can directly operate on data and trigger warnings, raise errors, or write out logs when exceeding specified failure thresholds. It’s a cinch to perform checks on import of the data and at key points during the transformation process, perhaps stopping everything if things are exceptionally bad with regard to data quality.</p>
-<hr>
-<p>The <strong>pointblank</strong> package is designed to be both straightforward yet powerful. And fast! All validation checks on remote tables are done entirely in-database so we can add dozens or hundreds of validation steps without any long waits for reporting. Here is a brief example of how to use <strong>pointblank</strong> to validate a local table with an agent.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># Generate a simple `action_levels` object to</span>
-<span class="co"># set the `warn` state if a validation step</span>
-<span class="co"># has a single 'fail' unit</span>
-<span class="kw">al</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/action_levels.html">action_levels</a></span>(warn_at = <span class="fl">1</span>)
-
-<span class="co"># Create a pointblank `agent` object, with the</span>
-<span class="co"># tibble as the target table. Use two validation</span>
-<span class="co"># step functions, then, `interrogate()`. The</span>
-<span class="co"># agent now has some useful intel.</span>
-<span class="kw">agent</span> <span class="op">&lt;-</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(
-    a = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">NA</span>, <span class="fl">7</span>),
-    b = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span>)
-  ) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/create_agent.html">create_agent</a></span>(name = <span class="st">"simple_tibble"</span>, actions = <span class="kw">al</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/col_vals_between.html">col_vals_between</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">a</span>), <span class="fl">1</span>, <span class="fl">9</span>, na_pass = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/col_vals_lt.html">col_vals_lt</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">c</span>), <span class="fl">12</span>, preconditions = <span class="op">~</span> <span class="kw">.</span> <span class="op">%&gt;%</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(c = <span class="kw">a</span> <span class="op">+</span> <span class="kw">b</span>)) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/interrogate.html">interrogate</a></span>()
-</pre></div>
-<p>Because an <em>agent</em> was used, we can get a <strong>gt</strong>-based report by printing it.</p>
+<p><img src="reference/figures/data_quality_reporting_workflow.svg"></p>
+<div class="section level2">
+<h2 id="table-validations-with-an-agent-and-data-quality-reporting">TABLE VALIDATIONS WITH AN AGENT AND DATA QUALITY REPORTING<a class="anchor" aria-label="anchor" href="#table-validations-with-an-agent-and-data-quality-reporting"></a>
+</h2>
+<p>Data validation can be carried out in <em>Data Quality Reporting</em> workflow, ultimately resulting in the production of a data quality analysis report. This is most useful in a non-interactive mode where data quality for database tables and on-disk data files must be periodically checked. The <strong>pointblank</strong> <em>agent</em> is given a collection of validation functions to define validation steps. We can get extracts of data rows that failed validation, set up custom functions that are invoked by exceeding set threshold failure rates, etc. Want to email the report regularly (or, only if certain conditions are met)? Yep, you can do all that.</p>
+<p>Here is an example of how to use <strong>pointblank</strong> to validate a local table with an <em>agent</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Generate a simple `action_levels` object to</span></span>
+<span><span class="co"># set the `warn` state if a validation step</span></span>
+<span><span class="co"># has a single 'fail' test unit</span></span>
+<span><span class="va">al</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/action_levels.html">action_levels</a></span><span class="op">(</span>warn_at <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a pointblank `agent` object, with the</span></span>
+<span><span class="co"># tibble as the target table. Use three validation</span></span>
+<span><span class="co"># functions, then, `interrogate()`. The agent will</span></span>
+<span><span class="co"># then have some useful intel.</span></span>
+<span><span class="va">agent</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>    a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/create_agent.html">create_agent</a></span><span class="op">(</span></span>
+<span>    label <span class="op">=</span> <span class="st">"A very *simple* example."</span>,</span>
+<span>    actions <span class="op">=</span> <span class="va">al</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_vals_between.html">col_vals_between</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">a</span>,</span>
+<span>    left <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    right <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>    na_pass <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_vals_lt.html">col_vals_lt</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">c</span>, <span class="fl">12</span>,</span>
+<span>    preconditions <span class="op">=</span> <span class="op">~</span> <span class="va">.</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>c <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_is_numeric.html">col_is_numeric</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/interrogate.html">interrogate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The reporting’s pretty sweet. We can get a <strong>gt</strong>-based report by printing an <em>agent</em>.</p>
 <p><img src="reference/figures/agent_report.png"></p>
+<p>The <strong>pointblank</strong> package is designed to be both straightforward yet powerful. And fast! Local data frames don’t take very long to validate extensively and all validation checks on remote tables are done entirely in-database. So we can add dozens or even hundreds of validation steps without any long waits for reporting.</p>
+<p>Should you want to perform validation checks on database or <em>Spark</em> tables, provide a <code>tbl_dbi</code> or <code>tbl_spark</code> object to <code><a href="reference/create_agent.html">create_agent()</a></code>. The <strong>pointblank</strong> package currently supports <em>PostgreSQL</em>. <em>MySQL</em>, <em>MariaDB</em>, <em>Microsoft SQL Server</em>, <em>Google BigQuery</em>, <em>DuckDB</em>, <em>SQLite</em>, and <em>Spark DataFrames</em> (through the <strong>sparklyr</strong> package).</p>
+<p>Here are some validation reports for the considerably larger <code>intendo::intendo_revenue</code> table.</p>
+<p><a href="https://rpubs.com/rich_i/intendo_rev_postgres" class="external-link"><img src="https://img.shields.io/static/v1?label=Validation%20Report&amp;message=postgres&amp;color=466288" alt="postgres"></a>    <a href="https://rpubs.com/rich_i/intendo_rev_mysql" class="external-link"><img src="https://img.shields.io/static/v1?label=Validation%20Report&amp;message=mysql&amp;color=e2af55" alt="mysql"></a>    <a href="https://rpubs.com/rich_i/intendo_rev_duckdb" class="external-link"><img src="https://img.shields.io/static/v1?label=Validation%20Report&amp;message=duckdb&amp;color=black" alt="duckdb"></a></p>
 <hr>
-<p>Next up is an example that follows the second, <em>agent</em>-less workflow (where validation functions operate directly on data). We use the same two validation functions as before but, this time, use them directly on the data! In this workflow, by default, an error will occur if there is a single ‘fail’ unit in any validation step:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(
-    a = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">NA</span>, <span class="fl">7</span>),
-    b = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span>)
-  ) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/col_vals_between.html">col_vals_between</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">a</span>), <span class="fl">1</span>, <span class="fl">9</span>, na_pass = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/col_vals_lt.html">col_vals_lt</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">c</span>), <span class="fl">12</span>, preconditions = <span class="op">~</span> <span class="kw">.</span> <span class="op">%&gt;%</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(c = <span class="kw">a</span> <span class="op">+</span> <span class="kw">b</span>))
-</pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>Error<span class="op">:</span><span class="st"> </span>Exceedance of failed test units where values <span class="cf">in</span> <span class="st">`</span><span class="dt">c</span><span class="st">`</span> should have been <span class="op">&lt;</span><span class="st"> `</span><span class="dt">12</span><span class="st">`</span>.</span>
-<span id="cb3-2"><a href="#cb3-2"></a>The <span class="st">`</span><span class="dt">col_vals_lt()</span><span class="st">`</span> validation failed beyond the absolute threshold <span class="kw">level</span> (<span class="dv">1</span>).</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="op">*</span><span class="st"> </span>failure <span class="kw">level</span> (<span class="dv">2</span>) <span class="op">&gt;=</span><span class="st"> </span>failure <span class="kw">threshold</span> (<span class="dv">1</span>) </span></code></pre></div>
-<p>We can downgrade this to a warning with the <code><a href="reference/action_levels.html">warn_on_fail()</a></code> helper function (assigning to <code>actions</code>). In this way, the data will be returned, but warnings will appear.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># This `warn_on_fail()` function is a nice</span>
-<span class="co"># shortcut for `action_levels(warn_at = 1)`;</span>
-<span class="co"># it works great in this data checking workflow</span>
-<span class="co"># (and the threshold can still be adjusted)</span>
-<span class="kw">al</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/action_levels.html">warn_on_fail</a></span>()
-
-<span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(
-    a = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">NA</span>, <span class="fl">7</span>),
-    b = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span>)
-  ) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/col_vals_between.html">col_vals_between</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">a</span>), <span class="fl">1</span>, <span class="fl">9</span>, na_pass = <span class="fl">TRUE</span>, actions = <span class="kw">al</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/col_vals_lt.html">col_vals_lt</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">c</span>), <span class="fl">12</span>, preconditions = <span class="op">~</span> <span class="kw">.</span> <span class="op">%&gt;%</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(c = <span class="kw">a</span> <span class="op">+</span> <span class="kw">b</span>), actions = <span class="kw">al</span>)
-</pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#&gt; # A tibble: 6 x 2</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;       a     b</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; 1     5     6</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 2     7     1</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 3     6     0</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; 4     5     6</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; 5    NA     0</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; 6     7     7</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a>Warning message<span class="op">:</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>Exceedance of failed test units where values <span class="cf">in</span> <span class="st">`</span><span class="dt">c</span><span class="st">`</span> should have been <span class="op">&lt;</span><span class="st"> `</span><span class="dt">12</span><span class="st">`</span>.</span>
-<span id="cb5-13"><a href="#cb5-13"></a>The <span class="st">`</span><span class="dt">col_vals_lt()</span><span class="st">`</span> validation failed beyond the absolute threshold <span class="kw">level</span> (<span class="dv">1</span>).</span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="op">*</span><span class="st"> </span>failure <span class="kw">level</span> (<span class="dv">2</span>) <span class="op">&gt;=</span><span class="st"> </span>failure <span class="kw">threshold</span> (<span class="dv">1</span>) </span></code></pre></div>
-<p>Should you need more fine-grained thresholds and resultant actions, the <code><a href="reference/action_levels.html">action_levels()</a></code> function can be used to specify multiple failure thresholds and side effects for each failure state. However, the <code><a href="reference/action_levels.html">warn_on_fail()</a></code> and <code><a href="reference/action_levels.html">stop_on_fail()</a></code> (applied by default, with <code>stop_at = 1</code>) helpers should in most cases suffice for this workflow.</p>
+<p><img src="reference/figures/pipeline_data_validation_workflow.svg"></p>
+</div>
+<div class="section level2">
+<h2 id="validations-directly-on-data">VALIDATIONS DIRECTLY ON DATA<a class="anchor" aria-label="anchor" href="#validations-directly-on-data"></a>
+</h2>
+<p>The <em>Pipeline Data Validation</em> workflow uses the same collection of validation functions but without need of an <em>agent</em>. This is useful for an ETL process where we want to periodically check data and trigger warnings, raise errors, or write out logs when exceeding specified failure thresholds. It’s a cinch to perform checks on import of the data and at key points during the transformation process, perhaps stopping data flow if things are unacceptable with regard to data quality.</p>
+<p>The following example uses the same three validation functions as before but, this time, we use them directly on the data. The validation functions act as a filter, passing data through unless execution is stopped by failing validations beyond the set threshold. In this workflow, by default, an error will occur if there is a single ‘fail’ test unit in any validation step:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>    a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_vals_between.html">col_vals_between</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">a</span>,</span>
+<span>    left <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    right <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>    na_pass <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_vals_lt.html">col_vals_lt</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">c</span>,</span>
+<span>    value <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>    preconditions <span class="op">=</span> <span class="op">~</span> <span class="va">.</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>c <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_is_numeric.html">col_is_numeric</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>Error<span class="sc">:</span> Exceedance of failed test units where values <span class="cf">in</span> <span class="st">`</span><span class="at">c</span><span class="st">`</span> should have been <span class="sc">&lt;</span> <span class="st">`</span><span class="at">12</span><span class="st">`</span>.</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>The <span class="st">`</span><span class="at">col_vals_lt()</span><span class="st">`</span> validation failed beyond the absolute threshold <span class="fu">level</span> (<span class="dv">1</span>).</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="sc">*</span> failure <span class="fu">level</span> (<span class="dv">2</span>) <span class="sc">&gt;=</span> failure <span class="fu">threshold</span> (<span class="dv">1</span>) </span></code></pre></div>
+<p>We can downgrade this error to a warning with the <code><a href="reference/action_levels.html">warn_on_fail()</a></code> helper function (assigning it to <code>actions</code>). In this way, the data will always be returned, but warnings will appear.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The `warn_on_fail()` function is a nice</span></span>
+<span><span class="co"># shortcut for `action_levels(warn_at = 1)`;</span></span>
+<span><span class="co"># it works great in this data checking workflow</span></span>
+<span><span class="co"># (and the threshold can still be adjusted)</span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>    a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_vals_between.html">col_vals_between</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">a</span>,</span>
+<span>    left <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    right <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>    na_pass <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    actions <span class="op">=</span> <span class="fu"><a href="reference/action_levels.html">warn_on_fail</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_vals_lt.html">col_vals_lt</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">c</span>,</span>
+<span>    value <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>    preconditions <span class="op">=</span> <span class="op">~</span> <span class="va">.</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>c <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span>,</span>
+<span>    actions <span class="op">=</span> <span class="fu"><a href="reference/action_levels.html">warn_on_fail</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/col_is_numeric.html">col_is_numeric</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>,</span>
+<span>    actions <span class="op">=</span> <span class="fu"><a href="reference/action_levels.html">warn_on_fail</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 2</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt;       a     b</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; 1     5     6</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 2     7     1</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; 3     6     0</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; 4     5     6</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; 5    NA     0</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; 6     7     7</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>Warning message<span class="sc">:</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>Exceedance of failed test units where values <span class="cf">in</span> <span class="st">`</span><span class="at">c</span><span class="st">`</span> should have been <span class="sc">&lt;</span> <span class="st">`</span><span class="at">12</span><span class="st">`</span>.</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>The <span class="st">`</span><span class="at">col_vals_lt()</span><span class="st">`</span> validation failed beyond the absolute threshold <span class="fu">level</span> (<span class="dv">1</span>).</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="sc">*</span> failure <span class="fu">level</span> (<span class="dv">2</span>) <span class="sc">&gt;=</span> failure <span class="fu">threshold</span> (<span class="dv">1</span>) </span></code></pre></div>
+<p>Should you need more fine-grained thresholds and resultant actions, the <code><a href="reference/action_levels.html">action_levels()</a></code> function can be used to specify multiple failure thresholds and side effects for each failure state. However, with <code><a href="reference/action_levels.html">warn_on_fail()</a></code> and <code><a href="reference/action_levels.html">stop_on_fail()</a></code> (applied by default, with <code>stop_at = 1</code>), you should have good enough options for this validation workflow.</p>
 <hr>
-<p>Using <strong>pointblank</strong> in an R Markdown workflow is enabled by default once the <strong>pointblank</strong> library is loaded. The framework allows for validation testing within specialized validation code chunks where the <code>validate = TRUE</code> option is set. Using <strong>pointblank</strong> validation functions on data in these marked code chunks will flag overall failure if the stop threshold is exceeded anywhere. All errors are reported in the validation code chunk after rendering the document to HTML, where green or red status buttons indicate whether all validations succeeded or failures occurred. Click them to reveal the otherwise hidden validation statements and any associated error messages.</p>
+</div>
+<div class="section level2">
+<h2 id="table-information">TABLE INFORMATION<a class="anchor" aria-label="anchor" href="#table-information"></a>
+</h2>
+<p>Table information can be synthesized in an <em>information management</em> workflow, giving us a snapshot of a data table we care to collect information on. The <strong>pointblank</strong> <em>informant</em> is fed a series of <code>info_*()</code> functions to define bits of information about a table. This info text can pertain to individual columns, the table as a whole, and whatever additional information makes sense for your organization. We can even glean little snippets of information (like column stats or sample values) from the target table with <code><a href="reference/info_snippet.html">info_snippet()</a></code> and the <code>snip_*()</code> functions and mix them into the data dictionary wherever they’re needed.</p>
+<p>Here is an example of how to use <strong>pointblank</strong> to incorporate pieces of info text into an <em>informant</em> object.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a pointblank `informant` object, with the</span></span>
+<span><span class="co"># tibble as the target table. Use a few information</span></span>
+<span><span class="co"># functions and end with `incorporate()`. The informant</span></span>
+<span><span class="co"># will then show you information about the tibble.</span></span>
+<span><span class="va">informant</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>    a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">6</span>,  <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/create_informant.html">create_informant</a></span><span class="op">(</span></span>
+<span>    label <span class="op">=</span> <span class="st">"A very *simple* example."</span>,</span>
+<span>    tbl_name <span class="op">=</span> <span class="st">"example_tbl"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_tabular.html">info_tabular</a></span><span class="op">(</span></span>
+<span>    description <span class="op">=</span> <span class="st">"This two-column table is nothing all that</span></span>
+<span><span class="st">    interesting, but, it's fine for examples on **GitHub**</span></span>
+<span><span class="st">    `README` pages. Column names are `a` and `b`. ((Cool stuff))"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_columns.html">info_columns</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">a</span>,</span>
+<span>    info <span class="op">=</span> <span class="st">"This column has an `NA` value. [[Watch out!]]&lt;&lt;color: red;&gt;&gt;"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_columns.html">info_columns</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">a</span>,</span>
+<span>    info <span class="op">=</span> <span class="st">"Mean value is `{a_mean}`."</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_columns.html">info_columns</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">b</span>,</span>
+<span>    info <span class="op">=</span> <span class="st">"Like column `a`. The lowest value is `{b_lowest}`."</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_columns.html">info_columns</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">b</span>,</span>
+<span>    info <span class="op">=</span> <span class="st">"The highest value is `{b_highest}`."</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_snippet.html">info_snippet</a></span><span class="op">(</span></span>
+<span>    snippet_name <span class="op">=</span> <span class="st">"a_mean"</span>,</span>
+<span>    fn <span class="op">=</span> <span class="op">~</span> <span class="va">.</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">a</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_snippet.html">info_snippet</a></span><span class="op">(</span>snippet_name <span class="op">=</span> <span class="st">"b_lowest"</span>, fn <span class="op">=</span> <span class="fu"><a href="reference/snip_lowest.html">snip_lowest</a></span><span class="op">(</span><span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_snippet.html">info_snippet</a></span><span class="op">(</span>snippet_name <span class="op">=</span> <span class="st">"b_highest"</span>, fn <span class="op">=</span> <span class="fu"><a href="reference/snip_highest.html">snip_highest</a></span><span class="op">(</span><span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/info_section.html">info_section</a></span><span class="op">(</span></span>
+<span>    section_name <span class="op">=</span> <span class="st">"further information"</span>, </span>
+<span>    `examples and documentation` <span class="op">=</span> <span class="st">"Examples for how to use the</span></span>
+<span><span class="st">    `info_*()` functions (and many more) are available at the</span></span>
+<span><span class="st">    [**pointblank** site](https://rstudio.github.io/pointblank/)."</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/incorporate.html">incorporate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>By printing the <em>informant</em> we get the table information report.</p>
+<p><img src="reference/figures/informant_report.png"></p>
+<p>Here is a link to a hosted information report for the <code>intendo::intendo_revenue</code> table:</p>
+<p><a href="https://rpubs.com/rich_i/info_revenue_postgres" class="external-link"><img src="https://img.shields.io/static/v1?label=Information%20Report&amp;message=intendo::intendo_revenue&amp;color=466288" alt="Information Report for intendo::intendo_revenue"></a></p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="table-scans">TABLE SCANS<a class="anchor" aria-label="anchor" href="#table-scans"></a>
+</h2>
+<p>We can use the <code><a href="reference/scan_data.html">scan_data()</a></code> function to generate a comprehensive summary of a tabular dataset. This allows us to quickly understand what’s in the dataset and it helps us determine if there are any peculiarities within the data. Scanning the <code><a href="https://dplyr.tidyverse.org/reference/storms.html" class="external-link">dplyr::storms</a></code> dataset with <code>scan_data(tbl = dplyr::storms)</code> gives us an interactive HTML report. Here are a few of them, published in <strong>RPubs</strong>:</p>
+<p><a href="https://rpubs.com/rich_i/scan_data_storms" class="external-link"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=dplyr::storms&amp;color=blue" alt="Table Scan of dplyr::storms"></a></p>
+<p><a href="https://rpubs.com/rich_i/scan_data_game_revenue" class="external-link"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=pointblank::game_revenue&amp;color=blue" alt="Table Scan of pointblank::game_revenue"></a></p>
+<p>Database tables can be used with <code><a href="reference/scan_data.html">scan_data()</a></code> as well. Here are two examples using (1) the <code>full_region</code> table of the <strong>Rfam</strong> database (hosted publicly at <code>mysql-rfam-public.ebi.ac.uk</code>) and (2) the <code>assembly</code> table of the <strong>Ensembl</strong> database (hosted publicly at <code>ensembldb.ensembl.org</code>).</p>
+<p><a href="https://rpubs.com/rich_i/rfam_full_region" class="external-link"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=Rfam:%20full_region&amp;color=green" alt="Rfam: full_region"></a></p>
+<p><a href="https://rpubs.com/rich_i/ensembl_assembly" class="external-link"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=Ensembl:%20assembly&amp;color=green" alt="Ensembl: assembly"></a></p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="overview-of-package-functions">OVERVIEW OF PACKAGE FUNCTIONS<a class="anchor" aria-label="anchor" href="#overview-of-package-functions"></a>
+</h2>
+<p>There are many functions available in <strong>pointblank</strong> for understanding data quality and creating data documentation. Here is an overview of all of them, grouped by family. For much more information on these, visit the <a href="https://rstudio.github.io/pointblank/">documentation website</a> or take a <em>Test Drive</em> in the <a href="https://rstudio.cloud/project/3411822" class="external-link">Posit Cloud project</a>.</p>
 <p align="center">
 </p>
-<p><img src="reference/figures/pointblank_rmarkdown.png" width="80%" style="border:2px solid #021a40;"></p>
+<p><img src="reference/figures/pointblank_functions.svg" width="100%"></p>
 
-<p>The above R Markdown document is available as a template in the RStudio IDE (it’s called <code>Pointblank Validation</code>). Try it out!</p>
 <hr>
-<p>While data validation is important, one has to be familiar with the data first. To that end, the <code><a href="reference/scan_data.html">scan_data()</a></code> function is provided in <strong>pointblank</strong> for generating a comprehensive summary of a tabular dataset. The report content is customizable, can be used inside an R Markdown document, and (as with the validation report) it can be produced in five different languages: <em>English</em>, <em>French</em>, <em>German</em>, <em>Italian</em>, and <em>Spanish</em>. Here are several published examples of a <strong>Table Scan</strong> for each of these languages using the <code><a href="https://dplyr.tidyverse.org/reference/storms.html">dplyr::storms</a></code> dataset. Clicking any of these will take you to a highly interactive <strong>RPubs</strong> document.</p>
-<p><a href="https://rpubs.com/rich_i/pointblank_storms_english"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=English&amp;color=blue" alt="Table Scan in English"></a>    <a href="https://rpubs.com/rich_i/pointblank_storms_french"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=French&amp;color=blue" alt="Table Scan in French"></a>    <a href="https://rpubs.com/rich_i/pointblank_storms_german"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=German&amp;color=blue" alt="Table Scan in German"></a>    <a href="https://rpubs.com/rich_i/pointblank_storms_italian"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=Italian&amp;color=blue" alt="Table Scan in Italian"></a>    <a href="https://rpubs.com/rich_i/pointblank_storms_spanish"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=Spanish&amp;color=blue" alt="Table Scan in Spanish"></a></p>
-<p>Database tables can be used with <code><a href="reference/scan_data.html">scan_data()</a></code> as well. Here are two examples using the <code>full_region</code> table of the <strong>Rfam</strong> database (hosted publicly at “mysql-rfam-public.ebi.ac.uk”) and the <code>assembly</code> table of the <strong>Ensembl</strong> database (hosted publicly at “ensembldb.ensembl.org”).</p>
-<p><a href="https://rpubs.com/rich_i/rfam_full_region"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=Rfam:%20full_region&amp;color=green" alt="Rfam: full_region"></a>    <a href="https://rpubs.com/rich_i/ensembl_assembly"><img src="https://img.shields.io/static/v1?label=Table%20Scan&amp;message=Ensembl:%20assembly&amp;color=green" alt="Ensembl: assembly"></a></p>
-<hr>
-<p>There are many functions available in <strong>pointblank</strong> for making comprehensive table validations. Each validation function is associated with an expectation function (of the form <code>expect_*()</code>). They are equivalent in usage and behavior to <strong>testthat</strong> tests with the big distinction that they check aspects of data tables (and not the results of function calls). Furthermore, each validation function has an associated test function (of the form <code>test_*()</code>) which always returns a logical value (<code>TRUE</code> or <code>FALSE</code>).</p>
-<p align="center">
-</p>
-<p><img src="reference/figures/pointblank_functions.svg" width="80%"></p>
-
+</div>
+<div class="section level2">
+<h2 id="installation">INSTALLATION<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Want to try this out? The <strong>pointblank</strong> package is available on <strong>CRAN</strong>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"pointblank"</span>)
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pointblank"</span><span class="op">)</span></span></code></pre></div>
 <p>You can also install the development version of <strong>pointblank</strong> from <strong>GitHub</strong>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"rich-iannone/pointblank"</span>)
-</pre></div>
-<p>If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an <a href="https://github.com/rich-iannone/pointblank/issues">issue</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"rstudio/pointblank"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="getting-in-touch">Getting in Touch<a class="anchor" aria-label="anchor" href="#getting-in-touch"></a>
+</h2>
+<p>If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an <a href="https://github.com/rstudio/pointblank/issues" class="external-link">issue</a>.</p>
+<p>Wanna talk about data validation in a more relaxed setting? Join our <a href="https://discord.com/invite/YH7CybCNCQ" class="external-link"><em>Discord server</em></a>! This is a great option for asking about the development of <strong>pointblank</strong>, pitching ideas that may become features, and just sharing your ideas!</p>
+<p><a href="https://discord.com/invite/YH7CybCNCQ" class="external-link"><img src="https://img.shields.io/badge/Discord-Chat%20with%20us-blue?style=social&amp;logo=discord&amp;logoColor=purple" alt="Discord Server"></a></p>
+</div>
+<div class="section level2">
+<h2 id="pointblank-for-python">Pointblank for Python<a class="anchor" aria-label="anchor" href="#pointblank-for-python"></a>
+</h2>
+<p>There’s also a version of <strong>pointblank</strong> for Python, a project that got off the ground in late 2024 and is gaining traction in the Python community. You can find it at <a href="https://github.com/posit-dev/pointblank" class="external-link uri">https://github.com/posit-dev/pointblank</a>.</p>
 <hr>
-<div id="how-pointblank-fits-in-with-other-packages-that-validate-tabular-data" class="section level4">
-<h4 class="hasAnchor">
-<a href="#how-pointblank-fits-in-with-other-packages-that-validate-tabular-data" class="anchor"></a>How <strong>pointblank</strong> Fits in with Other Packages that Validate Tabular Data</h4>
-<p>The <strong>pointblank</strong> package isn’t the only one of its kind available for <strong>R</strong>. The reason for introducing yet another has to do with <strong>pointblank</strong>’s goals:</p>
-<ul>
-<li>ability to work with local tables, database tables, and Spark DataFrames (via <strong>sparklyr</strong>) with minimal changes in the API</li>
-<li>great flexibility in data validation workflows, allowing for: (1) report-based validations, (2) inline validations, (3) validation of data tables in unit tests (with the set of <code>expect_*()</code> functions), and (4) validation of data tables to support conditional expressions (with the set of <code>test_*()</code> functions)</li>
-<li>extra tools for understanding new datasets (<code><a href="reference/scan_data.html">scan_data()</a></code>) and validating data in specialized R Markdown code chunks (<code><a href="reference/validate_rmd.html">validate_rmd()</a></code>)</li>
-<li>reporting outputs translated to multiple spoken languages</li>
-<li>developing an API that closely follows tidyverse conventions by adhering to the <a href="https://style.tidyverse.org">tidyverse style guide</a>
-</li>
-<li>lots of attention on making the package documentation and examples the best they can be</li>
-</ul>
-<p>While <strong>pointblank</strong> is trying to do something different with its own interface, it may not suit your specific needs. Here is a listing of some of the other validation packages available for <strong>R</strong>, with links to their respective project pages:</p>
-<p><strong>assertr</strong> (<a href="https://github.com/ropensci/assertr">GITHUB</a>, <a href="https://docs.ropensci.org/assertr">WEBSITE</a>)</p>
-<p><strong>validate</strong> (<a href="https://github.com/data-cleaning/validate">GITHUB</a>)</p>
-<p><strong>dataMaid</strong> (<a href="https://github.com/ekstroem/dataMaid">GITHUB</a>)</p>
+</div>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the gt project is released with a <a href="https://www.contributor-covenant.org/version/2/1/code_of_conduct.html" class="external-link">contributor code of conduct</a>.<br>By participating in this project you agree to abide by its terms.</p>
+</div>
+<div class="section level2">
+<h2 id="id_-license">📄 License<a class="anchor" aria-label="anchor" href="#id_-license"></a>
+</h2>
+<p><strong>pointblank</strong> is licensed under the MIT license. See the <a href="LICENSE.html"><code>LICENSE.md</code></a> file for more details.</p>
+<p>© Posit Software, PBC.</p>
+</div>
+<div class="section level2">
+<h2 id="id_️-governance">🏛️ Governance<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-governance"></a>
+</h2>
+<p>This project is primarily maintained by <a href="https://bsky.app/profile/richmeister.bsky.social" class="external-link">Rich Iannone</a>. Other authors may occasionally assist with some of these duties.</p>
 <hr>
-<div id="code-of-conduct" class="section level5">
-<h5 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h5>
-<p>Please note that the pointblank project is released with a <a href="https://www.contributor-covenant.org/version/1/0/0/code-of-conduct/">Contributor Code of Conduct</a>.<br>By participating in this project you agree to abide by its terms.</p>
 </div>
-</div>
-<div id="license" class="section level4">
-<h4 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h4>
-<p>MIT © Richard Iannone</p>
-</div>
-</div>
-  </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=pointblank">https://​cloud.r-project.org/​package=pointblank</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/rich-iannone/pointblank/">https://​github.com/​rich-iannone/​pointblank/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/rich-iannone/pointblank/issues">https://​github.com/​rich-iannone/​pointblank/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=pointblank" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/rstudio/pointblank/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/rstudio/pointblank/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing pointblank</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Richard Iannone <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3925-190X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Richard Iannone <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3925-190X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Mauricio Vargas <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-1017-7574" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>June Choe <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0701-921X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=pointblank"><img src="https://www.r-pkg.org/badges/version/pointblank" alt="CRAN status"></a></li>
-<li><a href="https://github.com/rich-iannone/pointblank/actions"><img src="https://github.com/rich-iannone/pointblank/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/rich-iannone/pointblank?branch=master"><img src="https://codecov.io/gh/rich-iannone/pointblank/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-</ul>
-</div>
-</div>
+
+
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p>Developed by Richard Iannone.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Richard Iannone, Mauricio Vargas, June Choe.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
+
+
 
 
   </body>

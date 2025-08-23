@@ -1,6 +1,18 @@
-pandoc: 2.7.3
-pkgdown: 1.5.1.9000
-pkgdown_sha: eae56f08694abebf93cdfc0dd8e9ede06d8c815f
-articles: []
-last_built: 2020-08-14T17:45Z
-
+pandoc: 3.1.11
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  INFO-1: INFO-1.html
+  INFO-2: INFO-2.html
+  pointblank: pointblank.html
+  VALID-I: VALID-I.html
+  VALID-II: VALID-II.html
+  VALID-III: VALID-III.html
+  VALID-IV: VALID-IV.html
+  VALID-V: VALID-V.html
+  VALID-VI: VALID-VI.html
+  validation_workflows: validation_workflows.html
+last_built: 2025-08-23T18:42Z
+urls:
+  reference: https://rstudio.github.io/pointblank/reference
+  article: https://rstudio.github.io/pointblank/articles
